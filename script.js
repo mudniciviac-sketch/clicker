@@ -36,6 +36,7 @@ clickDouble.addEventListener('click', () => {
 });
 
 afkminer.addEventListener('click', () => {
+
     if (points < cijena2) return; 
     n++;   
     points -= cijena2;  
@@ -46,11 +47,13 @@ afkminer.addEventListener('click', () => {
     afkminer.disabled = points < cijena2;
 });
 
-setInterval(() => {
+setInterval(brojanje(), 1000);
+    
+    function brojanje(){
         points += n;
         pointsDisplay.textContent = points;
         document.getElementById('n').textContent=n;
-}, 1000);
+}
 
 
 
