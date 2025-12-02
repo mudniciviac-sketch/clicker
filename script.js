@@ -41,6 +41,7 @@ afkminer.addEventListener('click', () => {
     setInterval(() => {
         points += n;
         pointsDisplay.textContent = points;
+        document.getElementById('n').textContent=n;
     }, 1000);
 
     n++;     
@@ -49,9 +50,9 @@ afkminer.addEventListener('click', () => {
 
     pointsDisplay.textContent = points; 
     cijenaMiner.textContent = cijena2;
-    document.getElementById('n').textContent=n;
     afkminer.disabled = true;
 });
+
 
 
 
