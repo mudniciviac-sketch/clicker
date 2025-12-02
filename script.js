@@ -52,7 +52,8 @@ if(n>=1){
         pointsDisplay.textContent = points;
         document.getElementById('n').textContent=n;
     }, 1000);
-}
+};
+
 
 
 
