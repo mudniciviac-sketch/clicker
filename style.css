@@ -24,9 +24,6 @@ button:hover {
     background-color: #45a049;
 }
 
-.bor{
-    background-image: url("https://teams.microsoft.com/l/message/48:notes/1764634108917?context=%7B%22contextType%22%3A%22chat%22%2C%22oid%22%3A%228%3Aorgid%3A0f017b95-baed-4c0f-86c8-d7426a003cb7%22%7D");
-}
 
 p {
     font-size: 24px;
@@ -61,5 +58,6 @@ h2{
     padding: 50px 40px;
     }
 }
+
 
 
