@@ -49,16 +49,17 @@ h2{
 }
 @media (max-width: 768px) {
     p{
-        font-size: 60 px;
+        font-size: 60px;
     }
     h2{
-        font-size: 70 px;
+        font-size: 70px;
     }
     p1{
-        font-size: 70 px;
+        font-size: 70px;
     }
     button {
     padding: 50px 40px;
     }
 }
+
 
