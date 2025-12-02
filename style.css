@@ -45,4 +45,10 @@ h2{
     font-size: 24px;
     font-weight: bold;
 
+
+}
+@media (max-width: 768px) {
+    h2,p1,p{
+        font-size: 60 px;
+    }
 }
