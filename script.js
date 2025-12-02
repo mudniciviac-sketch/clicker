@@ -53,4 +53,5 @@ afkminer.addEventListener('click', () => {
     afkminer.disabled = true;
 });
 
-document.getElementById("n").innerText=n;
+document.getElementById('n').textContent=n;
+
