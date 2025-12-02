@@ -46,13 +46,13 @@ afkminer.addEventListener('click', () => {
     afkminer.disabled = true;
 });
 
-if(n>=1){
-    setInterval(() => {
+setInterval(() => {
         points += n;
         pointsDisplay.textContent = points;
         document.getElementById('n').textContent=n;
-    }, 1000);
-};
+}, 1000);
+
+
 
 
 
