@@ -17,13 +17,14 @@ tabs.forEach(tab => {
 // GAME VARIABLES
 let points = 0;
 let pointsvalue = 1;
+let trenutno = 0;
 
 let cijena = 10;      // Upgrade 1
 let cijena2 = 200;    // Upgrade 2
 
 let cijenaMinerValue = 150; // Worker cijena
 let n = 0;
-
+let e = points;
 const clickButton = document.getElementById('clickButton');
 const pointsDisplay = document.getElementById('points');
 
@@ -133,6 +134,12 @@ setInterval(() => {
     }
 }, 1000);
 
+setInterval(() => {
+        trenutno = points - e;
+        e = points;
+        update();
+        saveGame();
+}, 1000);
 // UPDATE UI
 function update() {
     pointsDisplay.textContent = points;
@@ -144,3 +151,4 @@ function update() {
 
 // AUTO SAVE
 setInterval(saveGame, 3000);
+
