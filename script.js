@@ -116,20 +116,6 @@ clickDouble2.addEventListener('click', () => {
     saveGame();
 });
 
-// WORKER 2
-afkminer2.addEventListener('click', () => {
-    if (points < cijenaMinerValue2) return;
-
-    points -= cijenaMinerValue2;
-    nn+5;
-    cijenaMinerValue2 = Math.floor(cijenaMinerValue2 * 1.5);
-
-    cijenaMiner2.textContent = cijenaMinerValue2;
-    document.getElementById('n').textContent = n;
-
-    update();
-    saveGame();
-});
 // WORKER 1
 afkminer.addEventListener('click', () => {
     if (points < cijenaMinerValue) return;
@@ -144,6 +130,22 @@ afkminer.addEventListener('click', () => {
     update();
     saveGame();
 });
+
+// WORKER 2
+afkminer2.addEventListener('click', () => {
+    if (points < cijenaMinerValue2) return;
+
+    points -= cijenaMinerValue2;
+    n = n + 5;
+    cijenaMinerValue2 = Math.floor(cijenaMinerValue2 * 1.5);
+
+    cijenaMiner2.textContent = cijenaMinerValue2;
+    document.getElementById('n').textContent = n;
+
+    update();
+    saveGame();
+});
+
 // AUTO PPS
 setInterval(() => {
     if (n > 0) {
@@ -174,6 +176,7 @@ function update() {
 
 // AUTO SAVE
 setInterval(saveGame, 3000);
+
 
 
 
