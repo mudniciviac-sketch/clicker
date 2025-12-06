@@ -146,7 +146,7 @@ setInterval(() => {
 // UPDATE UI
 function update() {
     pointsDisplay.textContent = points;
-
+    document.getElementById('k').textContent = pointsvalue;
     clickDouble.disabled = points < cijena;
     clickDouble2.disabled = points < cijena2;
     afkminer.disabled = points < cijenaMinerValue;
@@ -154,5 +154,6 @@ function update() {
 
 // AUTO SAVE
 setInterval(saveGame, 3000);
+
 
 
