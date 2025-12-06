@@ -111,11 +111,9 @@ body {
 
 /* IMAGE BOXES */
 .card-img {
-    border: 2px solid #c8fa6d;
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    border-radius: 10px;
     height: 160px;
     width: 100%;
 }
@@ -211,5 +209,6 @@ body {
         margin-top: 15px;
     }
 }
+
 
 
