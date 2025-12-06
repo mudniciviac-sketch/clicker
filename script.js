@@ -15,7 +15,7 @@ tabs.forEach(tab => {
 });
 
 
-// TVOJA IGRA LOGIKA
+// GAME LOGIC
 let points = 0;
 let pointsvalue = 1;
 let cijena = 10;
