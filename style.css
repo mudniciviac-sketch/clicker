@@ -97,7 +97,7 @@ body {
 
 .card-img {
     border: 2px solid #b3e600;
-    background: #fff;
+    background-image: url("bornapiva.png");
     border-radius: 10px;
 }
 
@@ -147,3 +147,4 @@ body {
         margin-top: 10px;
     }
 }
+
