@@ -1,73 +1,87 @@
-// TAB LOGIC
-const tabs = document.querySelectorAll('.tab');
-const panels = document.querySelectorAll('.panel');
-
-tabs.forEach(tab => {
+// TAB SWITCH
+document.querySelectorAll('.tab').forEach(tab => {
     tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
 
-        const target = tab.getAttribute('data-tab');
-
-        panels.forEach(p => p.classList.remove('active'));
-        document.getElementById(target).classList.add('active');
+        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+        document.getElementById(tab.dataset.tab).classList.add('active');
     });
 });
 
-// GAME LOGIC
+// GAME VARS
 let points = 0;
-let pointsvalue = 1;
-let cijena = 10;
-let cijena2 = 150;
-let n = 0;
+let ppc = 1;    // points per click
+let pps = 0;    // points per second
 
-const clickButton = document.getElementById('clickButton');
-const pointsDisplay = document.getElementById('points');
+// UPGRADE COSTS
+let u1cost = 10;
+let u2cost = 200;
+let u3cost = 750;
 
-const clickDouble = document.getElementById('clickDouble');
-const cijenaDouble = document.getElementById('cijenaDouble');
+// WORKER COSTS
+let w1cost = 150;
+let w2cost = 500;
+let w3cost = 1500;
+let w4cost = 5000;
+let w5cost = 15000;
 
-const afkminer = document.getElementById('afkminer');
-const cijenaMiner = document.getElementById('cijenaMiner');
+// PPC VALUES
+const upgradeValues = [1, 5, 15];
 
-clickButton.addEventListener('click', () => {
-    points += pointsvalue;
+// PPS VALUES
+const workerValues = [1, 5, 12, 30, 100];
+
+// CLICK BUTTON
+document.getElementById("clickButton").addEventListener("click", () => {
+    points += ppc;
     update();
 });
 
-clickDouble.addEventListener('click', () => {
-    if (points < cijena) return;
+// ---- UPGRADE BUY ----
+function buyUpgrade(costVar, costId, addValue) {
+    if (points < costVar.value) return;
+    points -= costVar.value;
+    ppc += addValue;
 
-    points -= cijena;
-    pointsvalue++;
-    cijena *= 2;
+    costVar.value = Math.floor(costVar.value * 2);
+    document.getElementById(costId).textContent = costVar.value;
 
-    cijenaDouble.textContent = cijena;
     update();
-});
+}
 
-afkminer.addEventListener('click', () => {
-    if (points < cijena2) return;
+document.getElementById("u1btn").onclick = () => buyUpgrade({value:u1cost}, "u1cost", upgradeValues[0]);
+document.getElementById("u2btn").onclick = () => buyUpgrade({value:u2cost}, "u2cost", upgradeValues[1]);
+document.getElementById("u3btn").onclick = () => buyUpgrade({value:u3cost}, "u3cost", upgradeValues[2]);
 
-    points -= cijena2;
-    n++;
-    cijena2 = Math.floor(cijena2 * 1.5);
+// ---- WORKER BUY ----
+function buyWorker(costVar, costId, ppsAdd) {
+    if (points < costVar.value) return;
+    points -= costVar.value;
+    pps += ppsAdd;
 
-    cijenaMiner.textContent = cijena2;
-    document.getElementById('n').textContent = n;
+    costVar.value = Math.floor(costVar.value * 1.6);
+    document.getElementById(costId).textContent = costVar.value;
+
     update();
-});
+}
 
+document.getElementById("w1btn").onclick = () => buyWorker({value:w1cost}, "w1cost", workerValues[0]);
+document.getElementById("w2btn").onclick = () => buyWorker({value:w2cost}, "w2cost", workerValues[1]);
+document.getElementById("w3btn").onclick = () => buyWorker({value:w3cost}, "w3cost", workerValues[2]);
+document.getElementById("w4btn").onclick = () => buyWorker({value:w4cost}, "w4cost", workerValues[3]);
+document.getElementById("w5btn").onclick = () => buyWorker({value:w5cost}, "w5cost", workerValues[4]);
+
+// ---- AUTO PPS ----
 setInterval(() => {
-    if (n > 0) {
-        points += n;
+    if (pps > 0) {
+        points += pps;
         update();
     }
 }, 1000);
 
+// ---- UPDATE UI ----
 function update() {
-    pointsDisplay.textContent = points;
-
-    clickDouble.disabled = points < cijena;
-    afkminer.disabled = points < cijena2;
+    document.getElementById("points").textContent = points;
+    document.getElementById("pps").textContent = pps;
 }
