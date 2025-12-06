@@ -1,77 +1,73 @@
 // TAB LOGIC
-document.querySelectorAll('.tab').forEach(tab => {
+const tabs = document.querySelectorAll('.tab');
+const panels = document.querySelectorAll('.panel');
+
+tabs.forEach(tab => {
     tab.addEventListener('click', () => {
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        tabs.forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
 
-        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-        document.getElementById(tab.dataset.tab).classList.add('active');
+        const target = tab.getAttribute('data-tab');
+
+        panels.forEach(p => p.classList.remove('active'));
+        document.getElementById(target).classList.add('active');
     });
 });
 
-// GAME VARS
+// GAME LOGIC
 let points = 0;
-let ppc = 1;     
-let pps = 0;     
+let pointsvalue = 1;
+let cijena = 10;
+let cijena2 = 150;
+let n = 0;
 
-// Upgrade costs
-let u1cost = 10;
-let u2cost = 200;
-let u3cost = 750;
+const clickButton = document.getElementById('clickButton');
+const pointsDisplay = document.getElementById('points');
 
-// Worker costs
-let w1cost = 150;
-let w2cost = 500;
-let w3cost = 1500;
+const clickDouble = document.getElementById('clickDouble');
+const cijenaDouble = document.getElementById('cijenaDouble');
 
-// CLICK BUTTON
-document.getElementById('clickButton').addEventListener('click', () => {
-    points += ppc;
+const afkminer = document.getElementById('afkminer');
+const cijenaMiner = document.getElementById('cijenaMiner');
+
+clickButton.addEventListener('click', () => {
+    points += pointsvalue;
     update();
 });
 
-// BUY UPGRADE
-function buyUpgrade(cost, costID, valueAdd) {
-    if (points < cost.value) return;
-    points -= cost.value;
-    ppc += valueAdd;
+clickDouble.addEventListener('click', () => {
+    if (points < cijena) return;
 
-    cost.value = Math.floor(cost.value * 2);
-    document.getElementById(costID).textContent = cost.value;
+    points -= cijena;
+    pointsvalue++;
+    cijena *= 2;
 
+    cijenaDouble.textContent = cijena;
     update();
-}
+});
 
-document.getElementById("u1btn").onclick = () => buyUpgrade({value:u1cost}, "u1cost", 1);
-document.getElementById("u2btn").onclick = () => buyUpgrade({value:u2cost}, "u2cost", 5);
-document.getElementById("u3btn").onclick = () => buyUpgrade({value:u3cost}, "u3cost", 15);
+afkminer.addEventListener('click', () => {
+    if (points < cijena2) return;
 
-// BUY WORKER
-function buyWorker(cost, costID, ppsAdd) {
-    if (points < cost.value) return;
-    points -= cost.value;
-    pps += ppsAdd;
+    points -= cijena2;
+    n++;
+    cijena2 = Math.floor(cijena2 * 1.5);
 
-    cost.value = Math.floor(cost.value * 1.5);
-    document.getElementById(costID).textContent = cost.value;
-
+    cijenaMiner.textContent = cijena2;
+    document.getElementById('n').textContent = n;
     update();
-}
+});
 
-document.getElementById("w1btn").onclick = () => buyWorker({value:w1cost}, "w1cost", 1);
-document.getElementById("w2btn").onclick = () => buyWorker({value:w2cost}, "w2cost", 5);
-document.getElementById("w3btn").onclick = () => buyWorker({value:w3cost}, "w3cost", 12);
-
-// AUTO PPS
 setInterval(() => {
-    if (pps > 0) {
-        points += pps;
+    if (n > 0) {
+        points += n;
         update();
     }
 }, 1000);
 
-// UPDATE UI
 function update() {
-    document.getElementById("points").textContent = points;
-    document.getElementById("pps").textContent = pps;
+    pointsDisplay.textContent = points;
+
+    clickDouble.disabled = points < cijena;
+    afkminer.disabled = points < cijena2;
 }
