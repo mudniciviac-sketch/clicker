@@ -112,6 +112,9 @@ body {
 /* WORKER SLIKE */
 .worker1-img {
     background-image: url("bornapiva.png");
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
 }
 
 .worker2-img {
@@ -164,6 +167,7 @@ body {
         margin-top: 10px;
     }
 }
+
 
 
 
