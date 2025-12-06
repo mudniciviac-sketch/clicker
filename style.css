@@ -21,11 +21,9 @@ body {
     padding: 10px;
     margin-bottom: 20px;
     background: #ffffffcc;
-    border-radius: 10px;
 }
 
 .beer-area {
-    border: 3px solid #ff5c5c;
     height: 65%;
     display: flex;
     justify-content: center;
@@ -167,6 +165,7 @@ body {
         margin-top: 10px;
     }
 }
+
 
 
 
