@@ -172,10 +172,12 @@ function update() {
     clickDouble.disabled = points < cijena;
     clickDouble2.disabled = points < cijena2;
     afkminer.disabled = points < cijenaMinerValue;
+    afkminer2.disabled = points < cijenaMinerValue;
 }
 
 // AUTO SAVE
 setInterval(saveGame, 3000);
+
 
 
 
