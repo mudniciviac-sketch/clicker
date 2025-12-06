@@ -9,6 +9,13 @@ document.querySelectorAll('.tab').forEach(tab => {
     });
 });
 
+// FORMAT BIG NUMBERS
+function format(n) {
+    if (n >= 1_000_000_000) return (n / 1_000_000_000).toFixed(1) + "B";
+    if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + "M";
+    return n;
+}
+
 // GAME VARIABLES
 let points = 0;
 let pointsvalue = 1;
@@ -49,15 +56,16 @@ function loadGame() {
     pointsvalue = data.pointsvalue ?? 1;
     cijena = data.cijena ?? 10;
     cijena2 = data.cijena2 ?? 200;
-    cijena2 = data.cijena2 ?? 500;
+    cijena3 = data.cijena3 ?? 500;
     cijenaMinerValue = data.cijenaMinerValue ?? 150;
     cijenaMinerValue2 = data.cijenaMinerValue2 ?? 500;
     pps = data.pps ?? 0;
 
-    document.getElementById("cijenaDouble").textContent = cijena;
-    document.getElementById("cijenaDouble2").textContent = cijena2;
-    document.getElementById("cijenaMiner").textContent = cijenaMinerValue;
-    document.getElementById("cijenaMiner2").textContent = cijenaMinerValue2;
+    document.getElementById("cijenaDouble").textContent = format(cijena);
+    document.getElementById("cijenaDouble2").textContent = format(cijena2);
+    document.getElementById("cijenaDouble3").textContent = format(cijena3);
+    document.getElementById("cijenaMiner").textContent = format(cijenaMinerValue);
+    document.getElementById("cijenaMiner2").textContent = format(cijenaMinerValue2);
 
     update();
 }
@@ -76,7 +84,7 @@ document.getElementById('clickDouble').addEventListener('click', () => {
     points -= cijena;
     pointsvalue += 1;
     cijena *= 2;
-    document.getElementById("cijenaDouble").textContent = cijena;
+    document.getElementById("cijenaDouble").textContent = format(cijena);
     update();
     saveGame();
 });
@@ -87,7 +95,7 @@ document.getElementById('clickDouble2').addEventListener('click', () => {
     points -= cijena2;
     pointsvalue += 5;
     cijena2 *= 2;
-    document.getElementById("cijenaDouble2").textContent = cijena2;
+    document.getElementById("cijenaDouble2").textContent = format(cijena2);
     update();
     saveGame();
 });
@@ -96,9 +104,9 @@ document.getElementById('clickDouble2').addEventListener('click', () => {
 document.getElementById('clickDouble3').addEventListener('click', () => {
     if (points < cijena3) return;
     points -= cijena3;
-    pointsvalue += 5;
+    pointsvalue += 10;
     cijena3 *= 2;
-    document.getElementById("cijenaDouble3").textContent = cijena3;
+    document.getElementById("cijenaDouble3").textContent = format(cijena3);
     update();
     saveGame();
 });
@@ -109,7 +117,7 @@ document.getElementById('afkminer').addEventListener('click', () => {
     points -= cijenaMinerValue;
     pps += 1;
     cijenaMinerValue = Math.floor(cijenaMinerValue * 1.5);
-    document.getElementById("cijenaMiner").textContent = cijenaMinerValue;
+    document.getElementById("cijenaMiner").textContent = format(cijenaMinerValue);
     update();
     saveGame();
 });
@@ -120,28 +128,28 @@ document.getElementById('afkminer2').addEventListener('click', () => {
     points -= cijenaMinerValue2;
     pps += 5;
     cijenaMinerValue2 = Math.floor(cijenaMinerValue2 * 1.5);
-    document.getElementById("cijenaMiner2").textContent = cijenaMinerValue2;
+    document.getElementById("cijenaMiner2").textContent = format(cijenaMinerValue2);
     update();
     saveGame();
 });
 
-// AUTO PPS (adds PPS every second)
+// AUTO PPS
 setInterval(() => {
     points += pps;
     update();
     saveGame();
 }, 1000);
 
-// PEPS CALCULATION
+// PEPS (points earned per second)
 setInterval(() => {
     let peps = points - prevPoints;
     prevPoints = points;
-    document.getElementById("e").textContent = peps;
+    document.getElementById("e").textContent = format(peps);
 }, 1000);
 
 // UPDATE UI
 function update() {
-    document.getElementById("points").textContent = points;
+    document.getElementById("points").textContent = format(points);
     document.getElementById("k").textContent = pointsvalue;
     document.getElementById("n").textContent = pps;
 
@@ -151,5 +159,3 @@ function update() {
     document.getElementById("afkminer").disabled = points < cijenaMinerValue;
     document.getElementById("afkminer2").disabled = points < cijenaMinerValue2;
 }
-
-
