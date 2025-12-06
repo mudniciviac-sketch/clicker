@@ -1,63 +1,149 @@
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f0f0f0;
     margin: 0;
-    padding: 0;
+    background: #efefef;
+    font-family: Arial, sans-serif;
 }
 
-.container {
-    margin-top: 50px;
+/* GRID LAYOUT */
+.layout {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    height: 100vh;
 }
 
-button {
-    padding: 15px 30px;
-    font-size: 20px;
+/* LEFT SIDE */
+.left {
+    padding: 20px;
+    text-align: center;
+}
+
+.title {
+    padding: 10px;
+    margin-bottom: 20px;
+    background: #ffffffcc;
+    border-radius: 10px;
+}
+
+.beer-area {
+    border: 3px solid #ff5c5c;
+    height: 65%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
-    background-color: #4CAF50;
-    color: white;
+    border-radius: 10px;
+}
+
+.beer-img {
+    width: 250px;
+    height: auto;
+}
+
+.points-box {
+    margin-top: 20px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    font-size: 28px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+/* RIGHT SIDE */
+.right {
+    padding: 20px;
+}
+
+/* TABS */
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab {
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
     border: none;
-    border-radius: 5px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 5px #aaa;
 }
 
-button:hover {
-    background-color: #45a049;
+.tab.active {
+    background: #ddd;
 }
 
+/* PANELS */
+.panel {
+    display: none;
+}
 
-p {
-    font-size: 24px;
+.panel.active {
+    display: block;
+}
+
+/* CARDS */
+.card {
+    display: grid;
+    grid-template-columns: 130px 120px 1fr;
+    border: 2px solid #b3e600;
+    padding: 10px;
+    margin-bottom: 15px;
+    background: #faffd6;
+    border-radius: 10px;
+}
+
+.card-img {
+    border: 2px solid #b3e600;
+    background: #fff;
+    border-radius: 10px;
+}
+
+.buy-btn {
+    margin-top: 10px;
+    padding: 8px 15px;
+    cursor: pointer;
+    border: none;
+    background: #4caf50;
+    color: white;
+    border-radius: 8px;
+}
+
+.buy-btn:disabled {
+    background: #999;
+}
+
+.pps {
+    font-size: 20px;
     font-weight: bold;
 }
 
-p1{
-    text-align: right;
-    font-size: 24px;
-    font-weight: bold;
+/* MOBILE FRIENDLY */
+@media (max-width: 900px) {
 
+    .layout {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    .beer-area {
+        height: 300px;
+    }
+
+    .right {
+        margin-top: 20px;
+    }
+
+    .card {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+        text-align: center;
+    }
+
+    .card-desc {
+        grid-column: span 2;
+        margin-top: 10px;
+    }
 }
-
-
-h2{
-    font-size: 24px;
-    font-weight: bold;
-
-
-}
-@media (max-width: 768px) {
-    p{
-        font-size: 60px;
-    }
-    h2{
-        font-size: 70px;
-    }
-    p1{
-        font-size: 70px;
-    }
-    button {
-    padding: 50px 40px;
-    }
-}
-
-
-
