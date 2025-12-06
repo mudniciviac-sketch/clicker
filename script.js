@@ -1,4 +1,4 @@
-// TAB LOGIKA
+// TAB LOGIC
 const tabs = document.querySelectorAll('.tab');
 const panels = document.querySelectorAll('.panel');
 
@@ -13,7 +13,6 @@ tabs.forEach(tab => {
         document.getElementById(target).classList.add('active');
     });
 });
-
 
 // GAME LOGIC
 let points = 0;
