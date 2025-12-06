@@ -11,8 +11,8 @@ document.querySelectorAll('.tab').forEach(tab => {
 
 // GAME VARS
 let points = 0;
-let ppc = 1;     // piva po kliku
-let pps = 0;     // piva po sekundi
+let ppc = 1;     
+let pps = 0;     
 
 // Upgrade costs
 let u1cost = 10;
