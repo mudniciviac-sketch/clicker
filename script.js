@@ -22,11 +22,12 @@ let cijena2 = 150;
 let n = 0;
 
 const clickButton = document.getElementById('clickButton');
-const clickButton2 = document.getElementById('clickButton2');
 const pointsDisplay = document.getElementById('points');
 
 const clickDouble = document.getElementById('clickDouble');
 const cijenaDouble = document.getElementById('cijenaDouble');
+const clickDouble2 = document.getElementById('clickDouble2');
+const cijenaDouble2 = document.getElementById('cijenaDouble2');
 
 const afkminer = document.getElementById('afkminer');
 const cijenaMiner = document.getElementById('cijenaMiner');
@@ -88,13 +89,13 @@ clickDouble.addEventListener('click', () => {
 });
 // UPGRADE 2
 clickDouble2.addEventListener('click', () => {
-    if (points < cijena) return;
+    if (points < cijena2) return;
 
-    points -= cijena;
+    points -= cijena2;
     pointsvalue++;
-    cijena *= 2;
+    cijena2 *= 2;
 
-    cijenaDouble2.textContent = cijena;
+    cijenaDouble2.textContent = cijena2;
     update();
     saveGame();
 });
@@ -132,4 +133,5 @@ function update() {
 
 // AUTO SAVE EVERY 3 SECONDS
 setInterval(saveGame, 3000);
+
 
