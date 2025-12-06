@@ -70,6 +70,7 @@ function loadGame() {
     cijenaDouble2.textContent = cijena2;
     cijenaMiner.textContent = cijenaMinerValue;
     document.getElementById('n').textContent = n;
+     document.getElementById('e').textContent = trenutno;
 
     update();
 }
@@ -137,8 +138,10 @@ setInterval(() => {
 setInterval(() => {
         trenutno = points - e;
         e = points;
+        document.getElementById('e').textContent = trenutno + " /s";
         update();
         saveGame();
+        
 }, 1000);
 // UPDATE UI
 function update() {
@@ -151,4 +154,5 @@ function update() {
 
 // AUTO SAVE
 setInterval(saveGame, 3000);
+
 
