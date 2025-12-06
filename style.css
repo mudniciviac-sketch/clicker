@@ -133,7 +133,7 @@ body {
 }
 
 .upgrade2-img {
-    background-image: url("upgrade2.png");
+    background-image: url("upgrade1.png");
 }
 
 .buy-btn {
@@ -207,3 +207,4 @@ body {
         margin-top: 15px;
     }
 }
+
