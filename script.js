@@ -1,5 +1,23 @@
+// TAB LOGIKA
+const tabs = document.querySelectorAll('.tab');
+const panels = document.querySelectorAll('.panel');
+
+tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        const target = tab.getAttribute('data-tab');
+
+        panels.forEach(p => p.classList.remove('active'));
+        document.getElementById(target).classList.add('active');
+    });
+});
+
+
+// TVOJA IGRA LOGIKA
 let points = 0;
-let pointsvalue = 1; 
+let pointsvalue = 1;
 let cijena = 10;
 let cijena2 = 150;
 let n = 0;
@@ -15,49 +33,42 @@ const cijenaMiner = document.getElementById('cijenaMiner');
 
 clickButton.addEventListener('click', () => {
     points += pointsvalue;
-    pointsDisplay.textContent = points;
-
-
-    clickDouble.disabled = points < cijena;
-    afkminer.disabled = points < cijena2;
+    update();
 });
 
 clickDouble.addEventListener('click', () => {
-    if (points < cijena) return; 
+    if (points < cijena) return;
 
-    pointsvalue++;              
-    points -= cijena;  
-    cijena *= 2;    
+    points -= cijena;
+    pointsvalue++;
+    cijena *= 2;
 
-    pointsDisplay.textContent = points; 
     cijenaDouble.textContent = cijena;
-    
-    clickDouble.disabled = points < cijena;
+    update();
 });
 
 afkminer.addEventListener('click', () => {
+    if (points < cijena2) return;
 
-    if (points < cijena2) return; 
-    n++;   
-    points -= cijena2;  
+    points -= cijena2;
+    n++;
     cijena2 = Math.floor(cijena2 * 1.5);
 
-    pointsDisplay.textContent = points; 
     cijenaMiner.textContent = cijena2;
-    afkminer.disabled = points < cijena2;
+    document.getElementById('n').textContent = n;
+    update();
 });
 
-setInterval(brojanje(), 1000);
-    
-    function brojanje(){
+setInterval(() => {
+    if (n > 0) {
         points += n;
-        pointsDisplay.textContent = points;
-        document.getElementById('n').textContent=n;
+        update();
+    }
+}, 1000);
+
+function update() {
+    pointsDisplay.textContent = points;
+
+    clickDouble.disabled = points < cijena;
+    afkminer.disabled = points < cijena2;
 }
-
-
-
-
-
-
-
