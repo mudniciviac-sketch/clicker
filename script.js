@@ -16,6 +16,7 @@ let prevPoints = 0;
 
 let cijena = 10;
 let cijena2 = 200;
+let cijena3 = 600;
 
 let cijenaMinerValue = 150;
 let cijenaMinerValue2 = 500;
@@ -136,3 +137,4 @@ function update() {
     document.getElementById("afkminer").disabled = points < cijenaMinerValue;
     document.getElementById("afkminer2").disabled = points < cijenaMinerValue2;
 }
+
