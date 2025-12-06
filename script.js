@@ -22,6 +22,7 @@ let cijena2 = 150;
 let n = 0;
 
 const clickButton = document.getElementById('clickButton');
+const clickButton2 = document.getElementById('clickButton2');
 const pointsDisplay = document.getElementById('points');
 
 const clickDouble = document.getElementById('clickDouble');
@@ -85,7 +86,18 @@ clickDouble.addEventListener('click', () => {
     update();
     saveGame();
 });
+// UPGRADE 2
+clickDouble2.addEventListener('click', () => {
+    if (points < cijena) return;
 
+    points -= cijena;
+    pointsvalue++;
+    cijena *= 2;
+
+    cijenaDouble2.textContent = cijena;
+    update();
+    saveGame();
+});
 // WORKER 1
 afkminer.addEventListener('click', () => {
     if (points < cijena2) return;
@@ -120,3 +132,4 @@ function update() {
 
 // AUTO SAVE EVERY 3 SECONDS
 setInterval(saveGame, 3000);
+
