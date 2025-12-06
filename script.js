@@ -137,8 +137,10 @@ setInterval(() => {
 
 setInterval(() => {
         trenutno = points - e;
+        if(trenutno < 0)  document.getElementById('e').textContent = prijasnje + " /s";
+        else document.getElementById('e').textContent = trenutno + " /s";
         e = points;
-        document.getElementById('e').textContent = trenutno + " /s";
+        prijasnje = trenutno;
         update();
         saveGame();
         
@@ -154,6 +156,7 @@ function update() {
 
 // AUTO SAVE
 setInterval(saveGame, 3000);
+
 
 
 
