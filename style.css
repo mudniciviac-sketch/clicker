@@ -112,6 +112,15 @@ body {
 .buy-btn:disabled {
     background: #999;
 }
+/* Panels - show only active */
+.panel {
+    display: none;
+}
+
+.panel.active {
+    display: block;
+}
+
 
 /* MOBILE */
 @media (max-width: 900px) {
@@ -119,3 +128,4 @@ body {
     .card { grid-template-columns: 1fr; text-align: center; }
     .card-img { height: 200px; }
 }
+
