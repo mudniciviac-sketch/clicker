@@ -4,7 +4,7 @@ body {
     font-family: Arial, sans-serif;
 }
 
-/* GRID LAYOUT */
+/* LAYOUT */
 .layout {
     display: grid;
     grid-template-columns: 60% 40%;
@@ -84,7 +84,7 @@ body {
     display: block;
 }
 
-/* CARDS */
+/* UPGRADE / WORKER CARDS */
 .card {
     display: grid;
     grid-template-columns: 130px 120px 1fr;
@@ -95,10 +95,30 @@ body {
     border-radius: 10px;
 }
 
+/* IMAGE BOX (different for each card via classes) */
 .card-img {
     border: 2px solid #b3e600;
-    background-image: url("bornapiva.png");
+    background-size: cover;
+    background-position: center;
     border-radius: 10px;
+}
+
+/* UPGRADE SLIKE — postavi svoje slike */
+.upgrade1-img {
+    background-image: url("upgrade1.png");
+}
+
+.upgrade2-img {
+    background-image: url("upgrade2.png");
+}
+
+/* WORKER SLIKE */
+.worker1-img {
+    background-image: url("worker1.png");
+}
+
+.worker2-img {
+    background-image: url("worker2.png");
 }
 
 .buy-btn {
@@ -120,7 +140,7 @@ body {
     font-weight: bold;
 }
 
-/* MOBILE FRIENDLY */
+/* MOBILE ADAPTATION */
 @media (max-width: 900px) {
 
     .layout {
@@ -147,4 +167,3 @@ body {
         margin-top: 10px;
     }
 }
-
