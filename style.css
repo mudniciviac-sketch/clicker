@@ -29,11 +29,10 @@ body {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    border-radius: 10px;
 }
 
 .beer-img {
-    width: 1000px;
+    width: auto;
     height: auto;
 }
 
@@ -165,6 +164,7 @@ body {
         margin-top: 10px;
     }
 }
+
 
 
 
