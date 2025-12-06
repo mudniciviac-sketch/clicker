@@ -114,7 +114,7 @@ body {
 
 /* WORKER SLIKE */
 .worker1-img {
-    background-image: url("worker1.png");
+    background-image: url("bornapiva.png");
 }
 
 .worker2-img {
@@ -167,4 +167,5 @@ body {
         margin-top: 10px;
     }
 }
+
 
