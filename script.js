@@ -22,9 +22,12 @@ let trenutno = 0;
 let cijena = 10;      // Upgrade 1
 let cijena2 = 200;    // Upgrade 2
 
-let cijenaMinerValue = 150; // Worker cijena
+let cijenaMinerValue = 150; // Worker1 cijena
+let cijenaMinerValue2 = 500; // Worker2 cijena
+
 let n = 0;
 let e = points;
+
 const clickButton = document.getElementById('clickButton');
 const pointsDisplay = document.getElementById('points');
 
@@ -35,7 +38,9 @@ const clickDouble2 = document.getElementById('clickDouble2');
 const cijenaDouble2 = document.getElementById('cijenaDouble2');
 
 const afkminer = document.getElementById('afkminer');
+const afkminer2 = document.getElementById('afkminer2');
 const cijenaMiner = document.getElementById('cijenaMiner');
+const cijenaMiner2 = document.getElementById('cijenaMiner2');
 
 // SAVE GAME
 function saveGame() {
@@ -111,6 +116,20 @@ clickDouble2.addEventListener('click', () => {
     saveGame();
 });
 
+// WORKER 2
+afkminer2.addEventListener('click', () => {
+    if (points < cijenaMinerValue2) return;
+
+    points -= cijenaMinerValue2;
+    nn+5;
+    cijenaMinerValue2 = Math.floor(cijenaMinerValue2 * 1.5);
+
+    cijenaMiner2.textContent = cijenaMinerValue2;
+    document.getElementById('n').textContent = n;
+
+    update();
+    saveGame();
+});
 // WORKER 1
 afkminer.addEventListener('click', () => {
     if (points < cijenaMinerValue) return;
@@ -125,7 +144,6 @@ afkminer.addEventListener('click', () => {
     update();
     saveGame();
 });
-
 // AUTO PPS
 setInterval(() => {
     if (n > 0) {
@@ -156,6 +174,7 @@ function update() {
 
 // AUTO SAVE
 setInterval(saveGame, 3000);
+
 
 
 
