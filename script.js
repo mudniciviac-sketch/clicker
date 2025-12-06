@@ -18,7 +18,7 @@ tabs.forEach(tab => {
 let points = 0;
 let pointsvalue = 1;
 let cijena = 10;
-let cijena2 = 150;
+let cijena2 = 200;
 let n = 0;
 
 const clickButton = document.getElementById('clickButton');
@@ -92,7 +92,7 @@ clickDouble2.addEventListener('click', () => {
     if (points < cijena2) return;
 
     points -= cijena2;
-    pointsvalue++;
+    pointsvalue= pointsvalue +5;
     cijena2 *= 2;
 
     cijenaDouble2.textContent = cijena2;
@@ -133,5 +133,6 @@ function update() {
 
 // AUTO SAVE EVERY 3 SECONDS
 setInterval(saveGame, 3000);
+
 
 
