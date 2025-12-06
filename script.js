@@ -16,7 +16,7 @@ let prevPoints = 0;
 
 let cijena = 10;
 let cijena2 = 200;
-let cijena3 = 600;
+let cijena3 = 500;
 
 let cijenaMinerValue = 150;
 let cijenaMinerValue2 = 500;
@@ -30,6 +30,7 @@ function saveGame() {
         pointsvalue,
         cijena,
         cijena2,
+        cijena3,
         cijenaMinerValue,
         cijenaMinerValue2,
         pps
@@ -48,6 +49,7 @@ function loadGame() {
     pointsvalue = data.pointsvalue ?? 1;
     cijena = data.cijena ?? 10;
     cijena2 = data.cijena2 ?? 200;
+    cijena2 = data.cijena2 ?? 500;
     cijenaMinerValue = data.cijenaMinerValue ?? 150;
     cijenaMinerValue2 = data.cijenaMinerValue2 ?? 500;
     pps = data.pps ?? 0;
@@ -86,6 +88,17 @@ document.getElementById('clickDouble2').addEventListener('click', () => {
     pointsvalue += 5;
     cijena2 *= 2;
     document.getElementById("cijenaDouble2").textContent = cijena2;
+    update();
+    saveGame();
+});
+
+// UPGRADE 3
+document.getElementById('clickDouble3').addEventListener('click', () => {
+    if (points < cijena3) return;
+    points -= cijena3;
+    pointsvalue += 5;
+    cijena3 *= 2;
+    document.getElementById("cijenaDouble3").textContent = cijena3;
     update();
     saveGame();
 });
@@ -134,7 +147,9 @@ function update() {
 
     document.getElementById("clickDouble").disabled = points < cijena;
     document.getElementById("clickDouble2").disabled = points < cijena2;
+    document.getElementById("clickDouble3").disabled = points < cijena3;
     document.getElementById("afkminer").disabled = points < cijenaMinerValue;
     document.getElementById("afkminer2").disabled = points < cijenaMinerValue2;
 }
+
 
