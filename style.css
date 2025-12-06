@@ -130,10 +130,14 @@ body {
 
 .upgrade1-img {
     background-image: url("upgrade1.png");
+    height: 100%;
+    width: 100%;
 }
 
 .upgrade2-img {
     background-image: url("upgrade1.png");
+    height: 100%;
+    width: 100%;
 }
 
 .buy-btn {
@@ -207,4 +211,5 @@ body {
         margin-top: 15px;
     }
 }
+
 
