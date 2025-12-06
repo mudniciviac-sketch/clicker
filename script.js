@@ -1,4 +1,4 @@
-// TAB SWITCH
+// TAB LOGIC
 document.querySelectorAll('.tab').forEach(tab => {
     tab.addEventListener('click', () => {
         document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -11,68 +11,58 @@ document.querySelectorAll('.tab').forEach(tab => {
 
 // GAME VARS
 let points = 0;
-let ppc = 1;    // points per click
-let pps = 0;    // points per second
+let ppc = 1;     // piva po kliku
+let pps = 0;     // piva po sekundi
 
-// UPGRADE COSTS
+// Upgrade costs
 let u1cost = 10;
 let u2cost = 200;
 let u3cost = 750;
 
-// WORKER COSTS
+// Worker costs
 let w1cost = 150;
 let w2cost = 500;
 let w3cost = 1500;
-let w4cost = 5000;
-let w5cost = 15000;
-
-// PPC VALUES
-const upgradeValues = [1, 5, 15];
-
-// PPS VALUES
-const workerValues = [1, 5, 12, 30, 100];
 
 // CLICK BUTTON
-document.getElementById("clickButton").addEventListener("click", () => {
+document.getElementById('clickButton').addEventListener('click', () => {
     points += ppc;
     update();
 });
 
-// ---- UPGRADE BUY ----
-function buyUpgrade(costVar, costId, addValue) {
-    if (points < costVar.value) return;
-    points -= costVar.value;
-    ppc += addValue;
+// BUY UPGRADE
+function buyUpgrade(cost, costID, valueAdd) {
+    if (points < cost.value) return;
+    points -= cost.value;
+    ppc += valueAdd;
 
-    costVar.value = Math.floor(costVar.value * 2);
-    document.getElementById(costId).textContent = costVar.value;
+    cost.value = Math.floor(cost.value * 2);
+    document.getElementById(costID).textContent = cost.value;
 
     update();
 }
 
-document.getElementById("u1btn").onclick = () => buyUpgrade({value:u1cost}, "u1cost", upgradeValues[0]);
-document.getElementById("u2btn").onclick = () => buyUpgrade({value:u2cost}, "u2cost", upgradeValues[1]);
-document.getElementById("u3btn").onclick = () => buyUpgrade({value:u3cost}, "u3cost", upgradeValues[2]);
+document.getElementById("u1btn").onclick = () => buyUpgrade({value:u1cost}, "u1cost", 1);
+document.getElementById("u2btn").onclick = () => buyUpgrade({value:u2cost}, "u2cost", 5);
+document.getElementById("u3btn").onclick = () => buyUpgrade({value:u3cost}, "u3cost", 15);
 
-// ---- WORKER BUY ----
-function buyWorker(costVar, costId, ppsAdd) {
-    if (points < costVar.value) return;
-    points -= costVar.value;
+// BUY WORKER
+function buyWorker(cost, costID, ppsAdd) {
+    if (points < cost.value) return;
+    points -= cost.value;
     pps += ppsAdd;
 
-    costVar.value = Math.floor(costVar.value * 1.6);
-    document.getElementById(costId).textContent = costVar.value;
+    cost.value = Math.floor(cost.value * 1.5);
+    document.getElementById(costID).textContent = cost.value;
 
     update();
 }
 
-document.getElementById("w1btn").onclick = () => buyWorker({value:w1cost}, "w1cost", workerValues[0]);
-document.getElementById("w2btn").onclick = () => buyWorker({value:w2cost}, "w2cost", workerValues[1]);
-document.getElementById("w3btn").onclick = () => buyWorker({value:w3cost}, "w3cost", workerValues[2]);
-document.getElementById("w4btn").onclick = () => buyWorker({value:w4cost}, "w4cost", workerValues[3]);
-document.getElementById("w5btn").onclick = () => buyWorker({value:w5cost}, "w5cost", workerValues[4]);
+document.getElementById("w1btn").onclick = () => buyWorker({value:w1cost}, "w1cost", 1);
+document.getElementById("w2btn").onclick = () => buyWorker({value:w2cost}, "w2cost", 5);
+document.getElementById("w3btn").onclick = () => buyWorker({value:w3cost}, "w3cost", 12);
 
-// ---- AUTO PPS ----
+// AUTO PPS
 setInterval(() => {
     if (pps > 0) {
         points += pps;
@@ -80,7 +70,7 @@ setInterval(() => {
     }
 }, 1000);
 
-// ---- UPDATE UI ----
+// UPDATE UI
 function update() {
     document.getElementById("points").textContent = points;
     document.getElementById("pps").textContent = pps;
