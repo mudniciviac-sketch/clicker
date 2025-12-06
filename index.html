@@ -1,35 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hr">
 <head>
     <meta charset="UTF-8">
-    <meta-width="device-width, initial-scale=1.0">
-    <title>VOLIMO ALKOHOL</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beer Drinking Clicker</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div class="container">
-        <h1>Klikni za ALKAHAL</h1>
-        <img src="https://drinks.hr/app/uploads/2024/11/captain-morgan-white-rum-750ml-canada-gs1-front-grip-digital-render.png" alt="borna sa pivom" id="clickButton" height="20%" width="10%">
-        <p>Boce popijene: <span id="points">0</span></p>
+<div class="layout">
+
+    <!-- LEFT SIDE – CLICK ZONE (always visible) -->
+    <div class="left">
+
+        <h1 class="title">Beer Drinking Clicker</h1>
+
+        <div id="clickButton" class="beer-area">
+            <img src="beer.png" alt="Beer" class="beer-img">
+        </div>
+
+        <div class="points-box">
+            <span id="points">0</span> pive
+        </div>
+
     </div>
 
-    <div class="container">
-        <button id="clickDouble">VIŠE BOCA</button>
-        <h2>Cijena je: <span id="cijenaDouble">10</span></h2>
-    </div>
+    <!-- RIGHT SIDE – TABS + CARDS -->
+    <div class="right">
 
-    <div class="container">
-        <img src="bornapiva.png" id="afkminer" height="30%" width="10%">
-        <h2>Cijena je: <span id="cijenaMiner">150</span></h2>
-        <h2>Bps: <span id="n"></span></h2>
+        <div class="tabs">
+            <button class="tab active" data-tab="upgrades">Upgrades</button>
+            <button class="tab" data-tab="workers">Workers</button>
+        </div>
+
+        <!-- UPGRADE LIST -->
+        <div id="upgrades" class="panel active">
+
+            <div class="card">
+                <div class="card-left">
+                    <h3>Upgrade 1</h3>
+                    <p>Cijena: <span id="cijenaDouble">10</span></p>
+                    <button id="clickDouble" class="buy-btn">Kupi</button>
+                </div>
+                <div class="card-img"></div>
+                <div class="card-desc">
+                    +1 piva po kliku
+                </div>
+            </div>
+
+        </div>
+
+        <!-- WORKER LIST -->
+        <div id="workers" class="panel">
+
+            <div class="card">
+                <div class="card-left">
+                    <h3>Rudar</h3>
+                    <p>Cijena: <span id="cijenaMiner">150</span></p>
+                    <button id="afkminer" class="buy-btn">Zaposli</button>
+                </div>
+                <div class="card-img"></div>
+                <div class="card-desc">
+                    +1 pps (piva po sekundi)
+                </div>
+            </div>
+
+            <p class="pps">PPS: <span id="n">0</span></p>
+
+        </div>
+
     </div>
-    <script src="script.js"></script>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
