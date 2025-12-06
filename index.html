@@ -41,10 +41,10 @@
             <div class="card">
                 <div class="card-left">
                     <h3>Upgrade 1</h3>
-                    <p>Cijena: <span id="cijenaDouble">10</span></p>
-                    <button id="clickDouble" class="buy-btn">Kupi</button>
+                    <p>Cijena: <span id="u1cost">10</span></p>
+                    <button id="u1btn" class="buy-btn">Kupi</button>
                 </div>
-                <div class="card-img upgrade1-img"></div>
+                <div class="card-img upgrade-img"></div>
                 <div class="card-desc">+1 piva po kliku</div>
             </div>
 
@@ -52,11 +52,22 @@
             <div class="card">
                 <div class="card-left">
                     <h3>Upgrade 2</h3>
-                    <p>Cijena: 200</p>
-                    <button class="buy-btn">Kupi</button>
+                    <p>Cijena: <span id="u2cost">200</span></p>
+                    <button id="u2btn" class="buy-btn">Kupi</button>
                 </div>
-                <div class="card-img upgrade2-img"></div>
+                <div class="card-img upgrade-img"></div>
                 <div class="card-desc">+5 piva po kliku</div>
+            </div>
+
+            <!-- Upgrade 3 -->
+            <div class="card">
+                <div class="card-left">
+                    <h3>Upgrade 3</h3>
+                    <p>Cijena: <span id="u3cost">750</span></p>
+                    <button id="u3btn" class="buy-btn">Kupi</button>
+                </div>
+                <div class="card-img upgrade-img"></div>
+                <div class="card-desc">+15 piva po kliku</div>
             </div>
 
         </div>
@@ -68,8 +79,8 @@
             <div class="card">
                 <div class="card-left">
                     <h3>Rudar</h3>
-                    <p>Cijena: <span id="cijenaMiner">150</span></p>
-                    <button id="afkminer" class="buy-btn">Zaposli</button>
+                    <p>Cijena: <span id="w1cost">150</span></p>
+                    <button id="w1btn" class="buy-btn">Zaposli</button>
                 </div>
                 <div class="card-img worker1-img"></div>
                 <div class="card-desc">+1 PPS</div>
@@ -78,15 +89,48 @@
             <!-- Worker 2 -->
             <div class="card">
                 <div class="card-left">
-                    <h3>Pivski robot</h3>
-                    <p>Cijena: 500</p>
-                    <button class="buy-btn">Zaposli</button>
+                    <h3>Pivski Robot</h3>
+                    <p>Cijena: <span id="w2cost">500</span></p>
+                    <button id="w2btn" class="buy-btn">Zaposli</button>
                 </div>
                 <div class="card-img worker2-img"></div>
                 <div class="card-desc">+5 PPS</div>
             </div>
 
-            <p class="pps">PPS: <span id="n">0</span></p>
+            <!-- Worker 3 -->
+            <div class="card">
+                <div class="card-left">
+                    <h3>Vodonoša</h3>
+                    <p>Cijena: <span id="w3cost">1500</span></p>
+                    <button id="w3btn" class="buy-btn">Zaposli</button>
+                </div>
+                <div class="card-img worker3-img"></div>
+                <div class="card-desc">+12 PPS</div>
+            </div>
+
+            <!-- Worker 4 -->
+            <div class="card">
+                <div class="card-left">
+                    <h3>Kamiondžija</h3>
+                    <p>Cijena: <span id="w4cost">5000</span></p>
+                    <button id="w4btn" class="buy-btn">Zaposli</button>
+                </div>
+                <div class="card-img worker4-img"></div>
+                <div class="card-desc">+30 PPS</div>
+            </div>
+
+            <!-- Worker 5 -->
+            <div class="card">
+                <div class="card-left">
+                    <h3>Brewmaster</h3>
+                    <p>Cijena: <span id="w5cost">15000</span></p>
+                    <button id="w5btn" class="buy-btn">Zaposli</button>
+                </div>
+                <div class="card-img worker5-img"></div>
+                <div class="card-desc">+100 PPS</div>
+            </div>
+
+            <p class="pps">PPS: <span id="pps">0</span></p>
 
         </div>
 
