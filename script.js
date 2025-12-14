@@ -58,3 +58,176 @@ function saveGame() {
         worlevel2,
         worlevel3,
         upglevel1,
+        upglevel2,
+        upglevel3,
+        upglevel4
+    };
+    localStorage.setItem("beerClickerSave", JSON.stringify(data));
+}
+
+// LOAD GAME
+function loadGame() {
+    const saved = localStorage.getItem("beerClickerSave");
+    if (!saved) return;
+
+    const data = JSON.parse(saved);
+
+    points = data.points ?? 0;
+    pointsvalue = data.pointsvalue ?? 1;
+
+    cijena = data.cijena ?? 10;
+    cijena2 = data.cijena2 ?? 200;
+    cijena3 = data.cijena3 ?? 500;
+    cijena4 = data.cijena4 ?? 1000;
+
+    cijenaMinerValue = data.cijenaMinerValue ?? 150;
+    cijenaMinerValue2 = data.cijenaMinerValue2 ?? 500;
+    cijenaMinerValue3 = data.cijenaMinerValue3 ?? 1500;
+
+    worlevel1 = data.worlevel1 ?? 0;
+    worlevel2 = data.worlevel2 ?? 0;
+    worlevel3 = data.worlevel3 ?? 0;
+
+    upglevel1 = data.upglevel1 ?? 0;
+    upglevel2 = data.upglevel2 ?? 0;
+    upglevel3 = data.upglevel3 ?? 0;
+    upglevel4 = data.upglevel4 ?? 0;
+
+    document.getElementById("cijenaDouble").textContent = format(cijena);
+    document.getElementById("cijenaDouble2").textContent = format(cijena2);
+    document.getElementById("cijenaDouble3").textContent = format(cijena3);
+    document.getElementById("cijenaDouble4").textContent = format(cijena4);
+
+    document.getElementById("cijenaMiner").textContent = format(cijenaMinerValue);
+    document.getElementById("cijenaMiner2").textContent = format(cijenaMinerValue2);
+    document.getElementById("cijenaMiner3").textContent = format(cijenaMinerValue3);
+
+    document.getElementById("upglevel1").textContent = upglevel1;
+    document.getElementById("upglevel2").textContent = upglevel2;
+    document.getElementById("upglevel3").textContent = upglevel3;
+    document.getElementById("upglevel4").textContent = upglevel4;
+
+    document.getElementById("worlevel1").textContent = worlevel1;
+    document.getElementById("worlevel2").textContent = worlevel2;
+    document.getElementById("worlevel3").textContent = worlevel3;
+
+    update();
+}
+loadGame();
+
+// CLICK
+document.getElementById('clickButton').addEventListener('click', () => {
+    points += 1 + upglevel1 + upglevel2 * 5 + upglevel3 * 10 + upglevel4 * 20;
+    update();
+    saveGame();
+});
+
+// UPGRADES
+document.getElementById('clickDouble').addEventListener('click', () => {
+    if (points < cijena) return;
+    points -= cijena;
+    upglevel1++;
+    cijena *= 2;
+    document.getElementById("cijenaDouble").textContent = format(cijena);
+    document.getElementById("upglevel1").textContent = upglevel1;
+    update();
+    saveGame();
+});
+
+document.getElementById('clickDouble2').addEventListener('click', () => {
+    if (points < cijena2) return;
+    points -= cijena2;
+    upglevel2++;
+    cijena2 *= 2;
+    document.getElementById("cijenaDouble2").textContent = format(cijena2);
+    document.getElementById("upglevel2").textContent = upglevel2;
+    update();
+    saveGame();
+});
+
+document.getElementById('clickDouble3').addEventListener('click', () => {
+    if (points < cijena3) return;
+    points -= cijena3;
+    upglevel3++;
+    cijena3 *= 2;
+    document.getElementById("cijenaDouble3").textContent = format(cijena3);
+    document.getElementById("upglevel3").textContent = upglevel3;
+    update();
+    saveGame();
+});
+
+document.getElementById('clickDouble4').addEventListener('click', () => {
+    if (points < cijena4) return;
+    points -= cijena4;
+    upglevel4++;
+    cijena4 *= 2;
+    document.getElementById("cijenaDouble4").textContent = format(cijena4);
+    document.getElementById("upglevel4").textContent = upglevel4;
+    update();
+    saveGame();
+});
+
+// WORKERS
+document.getElementById('afkminer').addEventListener('click', () => {
+    if (points < cijenaMinerValue) return;
+    points -= cijenaMinerValue;
+    worlevel1++;
+    cijenaMinerValue = Math.floor(cijenaMinerValue * 1.5);
+    document.getElementById("cijenaMiner").textContent = format(cijenaMinerValue);
+    document.getElementById("worlevel1").textContent = worlevel1;
+    update();
+    saveGame();
+});
+
+document.getElementById('afkminer2').addEventListener('click', () => {
+    if (points < cijenaMinerValue2) return;
+    points -= cijenaMinerValue2;
+    worlevel2++;
+    cijenaMinerValue2 = Math.floor(cijenaMinerValue2 * 1.5);
+    document.getElementById("cijenaMiner2").textContent = format(cijenaMinerValue2);
+    document.getElementById("worlevel2").textContent = worlevel2;
+    update();
+    saveGame();
+});
+
+document.getElementById('afkminer3').addEventListener('click', () => {
+    if (points < cijenaMinerValue3) return;
+    points -= cijenaMinerValue3;
+    worlevel3++;
+    cijenaMinerValue3 = Math.floor(cijenaMinerValue3 * 1.5);
+    document.getElementById("cijenaMiner3").textContent = format(cijenaMinerValue3);
+    document.getElementById("worlevel3").textContent = worlevel3;
+    update();
+    saveGame();
+});
+
+// AUTO PPS
+setInterval(() => {
+    pps = (worlevel1 * 1) + (worlevel2 * 5) + (worlevel3 * 10);
+    points += pps;
+    update();
+    saveGame();
+}, 1000);
+
+// PEPS
+setInterval(() => {
+    const peps = points - prevPoints;
+    prevPoints = points;
+    document.getElementById("e").textContent = format(peps);
+}, 1000);
+
+// UPDATE UI
+function update() {
+    document.getElementById("points").textContent = format(points);
+    document.getElementById("k").textContent = pointsvalue;
+    document.getElementById("n").textContent = pps;
+
+    document.getElementById("clickDouble").disabled = points < cijena;
+    document.getElementById("clickDouble2").disabled = points < cijena2;
+    document.getElementById("clickDouble3").disabled = points < cijena3;
+    document.getElementById("clickDouble4").disabled = points < cijena4;
+
+    document.getElementById("afkminer").disabled = points < cijenaMinerValue;
+    document.getElementById("afkminer2").disabled = points < cijenaMinerValue2;
+    document.getElementById("afkminer3").disabled = points < cijenaMinerValue3;
+}
