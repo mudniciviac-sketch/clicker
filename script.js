@@ -102,6 +102,7 @@ document.getElementById('clickDouble').addEventListener('click', () => {
     upglevel1 ++;
     cijena *= 2;
     document.getElementById("cijenaDouble").textContent = format(cijena);
+    document.getElementById("upglevel1").textContent = upglevel1;
     update();
     saveGame();
 });
@@ -113,6 +114,7 @@ document.getElementById('clickDouble2').addEventListener('click', () => {
     upglevel2 ++;
     cijena2 *= 2;
     document.getElementById("cijenaDouble2").textContent = format(cijena2);
+    document.getElementById("upglevel2").textContent = upglevel2;
     update();
     saveGame();
 });
@@ -124,6 +126,7 @@ document.getElementById('clickDouble3').addEventListener('click', () => {
     upglevel3 ++;
     cijena3 *= 2;
     document.getElementById("cijenaDouble3").textContent = format(cijena3);
+    document.getElementById("upglevel3").textContent = upglevel3;
     update();
     saveGame();
 });
@@ -134,6 +137,7 @@ document.getElementById('clickDouble4').addEventListener('click', () => {
     upglevel4 ++;
     cijena4 *= 2;
     document.getElementById("cijenaDouble4").textContent = format(cijena4);
+    document.getElementById("upglevel4").textContent = upglevel4;
     update();
     saveGame();
 });
@@ -145,6 +149,7 @@ document.getElementById('afkminer').addEventListener('click', () => {
     worlevel1++;
     cijenaMinerValue = Math.floor(cijenaMinerValue * 1.5);
     document.getElementById("cijenaMiner").textContent = format(cijenaMinerValue);
+    document.getElementById("worlevel1").textContent = worlevel1;
     update();
     saveGame();
 });
@@ -156,6 +161,7 @@ document.getElementById('afkminer2').addEventListener('click', () => {
     worlevel2++;
     cijenaMinerValue2 = Math.floor(cijenaMinerValue2 * 1.5);
     document.getElementById("cijenaMiner2").textContent = format(cijenaMinerValue2);
+    document.getElementById("worlevel2").textContent = worlevel2;
     update();
     saveGame();
 });
@@ -167,12 +173,14 @@ document.getElementById('afkminer3').addEventListener('click', () => {
     worlevel3++;
     cijenaMinerValue2 = Math.floor(cijenaMinerValue3 * 1.5);
     document.getElementById("cijenaMiner3").textContent = format(cijenaMinerValue3);
+    document.getElementById("worlevel3").textContent = worlevel3;
     update();
     saveGame();
 });
 // AUTO PPS
 setInterval(() => {
-    points += (woklevel1 * 1) + (woklevel2 * 5) + (woklevel3 * 10);
+    pps = (woklevel1 * 1) + (woklevel2 * 5) + (woklevel3 * 10);
+    points += pps;
     update();
     saveGame();
 }, 1000);
@@ -199,4 +207,5 @@ function update() {
     document.getElementById("afkminer2").disabled = points < cijenaMinerValue2;
     document.getElementById("afkminer3").disabled = points < cijenaMinerValue2;
 }
+
 
