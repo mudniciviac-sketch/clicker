@@ -155,6 +155,10 @@ body {
 .buy-btn:hover {
     background: #43a047;
 }
+.uup-btn:hover{
+    background: #59166e;
+}
+
 
 .buy-btn:active {
     transform: scale(0.95);
@@ -222,6 +226,7 @@ body {
         margin-top: 15px;
     }
 }
+
 
 
 
