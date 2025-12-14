@@ -131,9 +131,15 @@ body {
 }
 
 .upgrade2-img {
-    background-image: url("upgrade1.png");
+    background-image: url("upgrade2.png");
+}
+.upgrade3-img {
+    background-image: url("upgrade3.png");
 }
 
+.upgrade4-img {
+    background-image: url("upgrade4.png");
+}
 .buy-btn {
     margin-top: 10px;
     padding: 10px 18px;
@@ -205,5 +211,6 @@ body {
         margin-top: 15px;
     }
 }
+
 
 
