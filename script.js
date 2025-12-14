@@ -20,7 +20,7 @@ function format(n) {
 // GAME VARIABLES
 let points = 0;
 let pointsvalue = 0;
-let prevPoints = 0;
+let prevPoints = 0
 
 let cijena = 10;
 let cijena2 = 200;
@@ -52,6 +52,11 @@ let uupCost1 = 1000;
 let uupCost2 = 5000;
 let uupCost3 = 15000;
 let uupCost4 = 30000;
+
+let provjera1 = 0;
+let provjera2 = 0;
+let provjera3 = 0;
+let provjera4 = 0;
 
 // CLICK BUTTON
 document.getElementById('clickButton').addEventListener('click', () => {
@@ -112,30 +117,42 @@ document.getElementById('clickDouble4').addEventListener('click', () => {
 // Beyond Upgrade buttons
 document.getElementById("uup1").addEventListener("click", () => {
     if(points < uupCost1) return;
+    provjera1 = uuplevel1;
     points -= uupCost1;
     uuplevel1++;
-    document.getElementById("uup1").style.display = "none";
+    if(uuplevel1 > provjera1){
+        document.getElementById("uup1").style.display = "none";
+    }
     update();
 });
 document.getElementById("uup2").addEventListener("click", () => {
     if(points < uupCost2) return;
+    provjera2 = uuplevel2;
     points -= uupCost2;
     uuplevel2++;
-    document.getElementById("uup2").style.display = "none";
+    if(uuplevel2 > provjera2){
+        document.getElementById("uup2").style.display = "none";
+    }
     update();
 });
 document.getElementById("uup3").addEventListener("click", () => {
     if(points < uupCost3) return;
+    provjera3 = uuplevel3;
     points -= uupCost3;
     uuplevel3++;
-    document.getElementById("uup3").style.display = "none";
+    if(uuplevel3 > provjera3){
+        document.getElementById("uup3").style.display = "none";
+    }
     update();
 });
 document.getElementById("uup4").addEventListener("click", () => {
     if(points < uupCost4) return;
+    provjera4 = uuplevel4;
     points -= uupCost4;
     uuplevel4++;
-    document.getElementById("uup4").style.display = "none";
+    if(uuplevel4 > provjera4){
+        document.getElementById("uup4").style.display = "none";
+    }
     update();
 });
 
@@ -219,3 +236,4 @@ function update() {
     document.getElementById("uupCost3").textContent = format(uupCost3);
     document.getElementById("uupCost4").textContent = format(uupCost4);
 }
+
