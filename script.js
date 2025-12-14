@@ -121,7 +121,7 @@ document.getElementById("uup1").addEventListener("click", () => {
     points -= uupCost1;
     uuplevel1++;
     if(uuplevel1 > provjera1){
-        document.getElementById("uup1").style.display = "none";
+        document.getElementById("uup1").style.display = "hidden";
     }
     update();
 });
@@ -131,7 +131,7 @@ document.getElementById("uup2").addEventListener("click", () => {
     points -= uupCost2;
     uuplevel2++;
     if(uuplevel2 > provjera2){
-        document.getElementById("uup2").style.display = "none";
+        document.getElementById("uup2").style.display = "hidden";
     }
     update();
 });
@@ -141,7 +141,7 @@ document.getElementById("uup3").addEventListener("click", () => {
     points -= uupCost3;
     uuplevel3++;
     if(uuplevel3 > provjera3){
-        document.getElementById("uup3").style.display = "none";
+        document.getElementById("uup3").style.display = "hidden";
     }
     update();
 });
@@ -151,7 +151,7 @@ document.getElementById("uup4").addEventListener("click", () => {
     points -= uupCost4;
     uuplevel4++;
     if(uuplevel4 > provjera4){
-        document.getElementById("uup4").style.display = "none";
+        document.getElementById("uup4").style.display = "hidden";
     }
     update();
 });
@@ -236,4 +236,5 @@ function update() {
     document.getElementById("uupCost3").textContent = format(uupCost3);
     document.getElementById("uupCost4").textContent = format(uupCost4);
 }
+
 
