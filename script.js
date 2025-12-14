@@ -42,9 +42,25 @@ let worlevel1 = 0;
 let worlevel2 = 0;
 let worlevel3 = 0;
 
+// Beyond Upgrade levels
+let uuplevel1 = 1;
+let uuplevel2 = 1;
+let uuplevel3 = 1;
+let uuplevel4 = 1;
+
+let uupCost1 = 1000;
+let uupCost2 = 5000;
+let uupCost3 = 15000;
+let uupCost4 = 30000;
+
 // CLICK BUTTON
 document.getElementById('clickButton').addEventListener('click', () => {
-    pointsvalue = 1 + upglevel1 * 1 + upglevel2 * 5 + upglevel3 * 10 + upglevel4 * 20;
+    pointsvalue = 
+        1 +
+        upglevel1 * uuplevel1 * 1 +
+        upglevel2 * uuplevel2 * 5 +
+        upglevel3 * uuplevel3 * 10 +
+        upglevel4 * uuplevel4 * 20;
     points += pointsvalue;
     update();
 });
@@ -91,10 +107,39 @@ document.getElementById('clickDouble4').addEventListener('click', () => {
     document.getElementById("cijenaDouble4").textContent = format(cijena4);
     document.getElementById("upglevel4").textContent = upglevel4;
     update();
-
 });
 
-// WORKER 1
+// Beyond Upgrade buttons
+document.getElementById("uup1").addEventListener("click", () => {
+    if(points < uupCost1) return;
+    points -= uupCost1;
+    uuplevel1++;
+    document.getElementById("uup1").style.display = "none";
+    update();
+});
+document.getElementById("uup2").addEventListener("click", () => {
+    if(points < uupCost2) return;
+    points -= uupCost2;
+    uuplevel2++;
+    document.getElementById("uup2").style.display = "none";
+    update();
+});
+document.getElementById("uup3").addEventListener("click", () => {
+    if(points < uupCost3) return;
+    points -= uupCost3;
+    uuplevel3++;
+    document.getElementById("uup3").style.display = "none";
+    update();
+});
+document.getElementById("uup4").addEventListener("click", () => {
+    if(points < uupCost4) return;
+    points -= uupCost4;
+    uuplevel4++;
+    document.getElementById("uup4").style.display = "none";
+    update();
+});
+
+// WORKERS (isti kod kao prije)
 document.getElementById('afkminer').addEventListener('click', () => {
     if (points < cijenaMinerValue) return;
     points -= cijenaMinerValue;
@@ -103,10 +148,8 @@ document.getElementById('afkminer').addEventListener('click', () => {
     document.getElementById("cijenaMiner").textContent = format(cijenaMinerValue);
     document.getElementById("worlevel1").textContent = worlevel1;
     update();
-
 });
 
-// WORKER 2
 document.getElementById('afkminer2').addEventListener('click', () => {
     if (points < cijenaMinerValue2) return;
     points -= cijenaMinerValue2;
@@ -115,10 +158,8 @@ document.getElementById('afkminer2').addEventListener('click', () => {
     document.getElementById("cijenaMiner2").textContent = format(cijenaMinerValue2);
     document.getElementById("worlevel2").textContent = worlevel2;
     update();
-
 });
 
-// WORKER 3
 document.getElementById('afkminer3').addEventListener('click', () => {
     if (points < cijenaMinerValue3) return;
     points -= cijenaMinerValue3;
@@ -127,7 +168,6 @@ document.getElementById('afkminer3').addEventListener('click', () => {
     document.getElementById("cijenaMiner3").textContent = format(cijenaMinerValue3);
     document.getElementById("worlevel3").textContent = worlevel3;
     update();
-    saveGame();
 });
 
 // AUTO PPS
@@ -135,7 +175,6 @@ setInterval(() => {
     pps = (worlevel1 * 1) + (worlevel2 * 5) + (worlevel3 * 10);
     points += pps;
     update();
-    
 }, 1000);
 
 // PEPS
@@ -147,6 +186,14 @@ setInterval(() => {
 
 // UPDATE UI
 function update() {
+    // points + PPC + PPS
+    pointsvalue = 
+        1 +
+        upglevel1 * uuplevel1 * 1 +
+        upglevel2 * uuplevel2 * 5 +
+        upglevel3 * uuplevel3 * 10 +
+        upglevel4 * uuplevel4 * 20;
+
     document.getElementById("points").textContent = format(points);
     document.getElementById("k").textContent = pointsvalue;
     document.getElementById("n").textContent = pps;
@@ -159,7 +206,16 @@ function update() {
     document.getElementById("afkminer").disabled = points < cijenaMinerValue;
     document.getElementById("afkminer2").disabled = points < cijenaMinerValue2;
     document.getElementById("afkminer3").disabled = points < cijenaMinerValue3;
+
+    // Beyond Upgrade gumbi pojavljuju se na 5,10,15...
+    if(upglevel1 > 0 && upglevel1 % 5 === 0) document.getElementById("uup1").style.display = "block";
+    if(upglevel2 > 0 && upglevel2 % 5 === 0) document.getElementById("uup2").style.display = "block";
+    if(upglevel3 > 0 && upglevel3 % 5 === 0) document.getElementById("uup3").style.display = "block";
+    if(upglevel4 > 0 && upglevel4 % 5 === 0) document.getElementById("uup4").style.display = "block";
+
+    // ažuriraj cijene Beyond (ako želiš dinamički)
+    document.getElementById("uupCost1").textContent = format(uupCost1);
+    document.getElementById("uupCost2").textContent = format(uupCost2);
+    document.getElementById("uupCost3").textContent = format(uupCost3);
+    document.getElementById("uupCost4").textContent = format(uupCost4);
 }
-
-
-
