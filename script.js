@@ -19,7 +19,6 @@ function format(n) {
 
 // GAME VARIABLES
 let points = 0;
-let pointsvalue = 1;
 let prevPoints = 0;
 
 let cijena = 10;
@@ -210,3 +209,4 @@ function update() {
     document.getElementById("afkminer2").disabled = points < cijenaMinerValue2;
     document.getElementById("afkminer3").disabled = points < cijenaMinerValue3;
 }
+
