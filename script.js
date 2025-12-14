@@ -19,6 +19,7 @@ function format(n) {
 
 // GAME VARIABLES
 let points = 0;
+let pointsvalue = 0;
 let prevPoints = 0;
 
 let cijena = 10;
@@ -67,10 +68,12 @@ function loadGame() {
 
     points = data.points ?? 0;
     pointsvalue = data.pointsvalue ?? 1;
+
     cijena = data.cijena ?? 10;
     cijena2 = data.cijena2 ?? 200;
     cijena3 = data.cijena3 ?? 500;
     cijena4 = data.cijena4 ?? 1000;
+
     cijenaMinerValue = data.cijenaMinerValue ?? 150;
     cijenaMinerValue2 = data.cijenaMinerValue2 ?? 500;
     cijenaMinerValue3 = data.cijenaMinerValue3 ?? 1500;
@@ -90,7 +93,8 @@ loadGame();
 
 // CLICK BUTTON
 document.getElementById('clickButton').addEventListener('click', () => {
-    points += 1 + upglevel1 * 1 + upglevel2 * 5 + upglevel3 * 10 + upglevel4 * 20;
+    pointsvalue = 1 + upglevel1 * 1 + upglevel2 * 5 + upglevel3 * 10 + upglevel4 * 20;
+    points += pointsvalue;
     update();
     saveGame();
 });
