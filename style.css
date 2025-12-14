@@ -192,25 +192,23 @@ body {
     position: relative;
 }
 
-
-/* MOBILE */
 @media (max-width: 900px) {
 
     .layout {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* lijeva i desna strana jedna ispod druge */
         height: auto;
     }
 
     .beer-area {
-        height: 300px;
+        height: 300px; /* prilagođava visinu slike piva */
     }
 
     .right {
-        margin-top: 20px;
+        margin-top: 20px; /* razmak između sekcija */
     }
 
     .card {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* card se prelama u jednu kolonu */
         text-align: center;
     }
 
