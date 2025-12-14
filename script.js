@@ -11,10 +11,10 @@ document.querySelectorAll('.tab').forEach(tab => {
 
 // FORMAT BIG NUMBERS
 function format(n) {
-    if (n >= 1_000_000_000_000) return (n / 1_000_000_000).toFixed(1) + "T";
+    if (n >= 1_000_000_000_000) return (n / 1_000_000_000_000).toFixed(1) + "T";
     if (n >= 1_000_000_000) return (n / 1_000_000_000).toFixed(1) + "B";
     if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + "M";
-    return n;
+    return Math.floor(n);
 }
 
 // GAME VARIABLES
@@ -29,7 +29,7 @@ let cijena4 = 1000;
 
 let cijenaMinerValue = 150;
 let cijenaMinerValue2 = 500;
-let cijenaMinerValue2 = 1500;
+let cijenaMinerValue3 = 1500;
 
 let pps = 0;
 
@@ -40,7 +40,7 @@ let upglevel4 = 0;
 
 let worlevel1 = 0;
 let worlevel2 = 0;
-let worlevel3 =0;
+let worlevel3 = 0;
 
 // SAVE GAME
 function saveGame() {
@@ -53,160 +53,8 @@ function saveGame() {
         cijena4,
         cijenaMinerValue,
         cijenaMinerValue2,
-        pps
-    };
-    localStorage.setItem("beerClickerSave", JSON.stringify(data));
-}
-
-// LOAD GAME
-function loadGame() {
-    const saved = localStorage.getItem("beerClickerSave");
-    if (!saved) return;
-
-    const data = JSON.parse(saved);
-
-    points = data.points ?? 0;
-    pointsvalue = data.pointsvalue ?? 1;
-    cijena = data.cijena ?? 10;
-    cijena2 = data.cijena2 ?? 200;
-    cijena3 = data.cijena3 ?? 500;
-    cijena4 = data.cijena4 ?? 1000;
-    cijenaMinerValue = data.cijenaMinerValue ?? 150;
-    cijenaMinerValue2 = data.cijenaMinerValue2 ?? 500;
-    cijenaMinerValue3 = data.cijenaMinerValue2 ?? 1500;
-    pps = data.pps ?? 0;
-
-    document.getElementById("cijenaDouble").textContent = format(cijena);
-    document.getElementById("cijenaDouble2").textContent = format(cijena2);
-    document.getElementById("cijenaDouble3").textContent = format(cijena3);
-    document.getElementById("cijenaDouble3").textContent = format(cijena4);
-    document.getElementById("cijenaMiner").textContent = format(cijenaMinerValue);
-    document.getElementById("cijenaMiner2").textContent = format(cijenaMinerValue2);
-    document.getElementById("cijenaMiner3").textContent = format(cijenaMinerValue3);
-
-    update();
-}
-loadGame();
-
-// CLICK BUTTON
-document.getElementById('clickButton').addEventListener('click', () => {
-    points += 1 + upglevel1 * 1 + upglevel2 * 5 + upglevel3 * 10 + upglevel4 *20;
-    update();
-    saveGame();
-});
-
-// UPGRADE 1
-document.getElementById('clickDouble').addEventListener('click', () => {
-    if (points < cijena) return;
-    points -= cijena;
-    upglevel1 ++;
-    cijena *= 2;
-    document.getElementById("cijenaDouble").textContent = format(cijena);
-    document.getElementById("upglevel1").textContent = upglevel1;
-    update();
-    saveGame();
-});
-
-// UPGRADE 2
-document.getElementById('clickDouble2').addEventListener('click', () => {
-    if (points < cijena2) return;
-    points -= cijena2;
-    upglevel2 ++;
-    cijena2 *= 2;
-    document.getElementById("cijenaDouble2").textContent = format(cijena2);
-    document.getElementById("upglevel2").textContent = upglevel2;
-    update();
-    saveGame();
-});
-
-// UPGRADE 3
-document.getElementById('clickDouble3').addEventListener('click', () => {
-    if (points < cijena3) return;
-    points -= cijena3;
-    upglevel3 ++;
-    cijena3 *= 2;
-    document.getElementById("cijenaDouble3").textContent = format(cijena3);
-    document.getElementById("upglevel3").textContent = upglevel3;
-    update();
-    saveGame();
-});
-
-document.getElementById('clickDouble4').addEventListener('click', () => {
-    if (points < cijena4) return;
-    points -= cijena4;
-    upglevel4 ++;
-    cijena4 *= 2;
-    document.getElementById("cijenaDouble4").textContent = format(cijena4);
-    document.getElementById("upglevel4").textContent = upglevel4;
-    update();
-    saveGame();
-});
-
-// WORKER 1
-document.getElementById('afkminer').addEventListener('click', () => {
-    if (points < cijenaMinerValue) return;
-    points -= cijenaMinerValue;
-    worlevel1++;
-    cijenaMinerValue = Math.floor(cijenaMinerValue * 1.5);
-    document.getElementById("cijenaMiner").textContent = format(cijenaMinerValue);
-    document.getElementById("worlevel1").textContent = worlevel1;
-    update();
-    saveGame();
-});
-
-// WORKER 2
-document.getElementById('afkminer2').addEventListener('click', () => {
-    if (points < cijenaMinerValue2) return;
-    points -= cijenaMinerValue2;
-    worlevel2++;
-    cijenaMinerValue2 = Math.floor(cijenaMinerValue2 * 1.5);
-    document.getElementById("cijenaMiner2").textContent = format(cijenaMinerValue2);
-    document.getElementById("worlevel2").textContent = worlevel2;
-    update();
-    saveGame();
-});
-
-// WORKER 3
-document.getElementById('afkminer3').addEventListener('click', () => {
-    if (points < cijenaMinerValue3) return;
-    points -= cijenaMinerValue3;
-    worlevel3++;
-    cijenaMinerValue2 = Math.floor(cijenaMinerValue3 * 1.5);
-    document.getElementById("cijenaMiner3").textContent = format(cijenaMinerValue3);
-    document.getElementById("worlevel3").textContent = worlevel3;
-    update();
-    saveGame();
-});
-// AUTO PPS
-setInterval(() => {
-    pps = (woklevel1 * 1) + (woklevel2 * 5) + (woklevel3 * 10);
-    points += pps;
-    update();
-    saveGame();
-}, 1000);
-
-// PEPS (points earned per second)
-setInterval(() => {
-    let peps = points - prevPoints;
-    prevPoints = points;
-    document.getElementById("e").textContent = format(peps);
-}, 1000);
-
-// UPDATE UI
-function update() {
-    document.getElementById("points").textContent = format(points);
-    document.getElementById("k").textContent = pointsvalue;
-    document.getElementById("n").textContent = pps;
-
-    document.getElementById("clickDouble").disabled = points < cijena;
-    document.getElementById("clickDouble2").disabled = points < cijena2;
-    document.getElementById("clickDouble3").disabled = points < cijena3;
-    document.getElementById("clickDouble4").disabled = points < cijena3;
-    
-    document.getElementById("afkminer").disabled = points < cijenaMinerValue;
-    document.getElementById("afkminer2").disabled = points < cijenaMinerValue2;
-    document.getElementById("afkminer3").disabled = points < cijenaMinerValue2;
-}
-
-
-
+        cijenaMinerValue3,
+        worlevel1,
+        worlevel2,
+        worlevel3,
+        upglevel1,
