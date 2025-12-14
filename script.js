@@ -90,7 +90,7 @@ loadGame();
 
 // CLICK BUTTON
 document.getElementById('clickButton').addEventListener('click', () => {
-    points += upglevel1 * 1 + upglevel2 * 5 + upglevel3 * 10 + upglevel4 *20;
+    points += 1 + upglevel1 * 1 + upglevel2 * 5 + upglevel3 * 10 + upglevel4 *20;
     update();
     saveGame();
 });
@@ -207,5 +207,6 @@ function update() {
     document.getElementById("afkminer2").disabled = points < cijenaMinerValue2;
     document.getElementById("afkminer3").disabled = points < cijenaMinerValue2;
 }
+
 
 
