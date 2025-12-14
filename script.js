@@ -47,7 +47,6 @@ document.getElementById('clickButton').addEventListener('click', () => {
     pointsvalue = 1 + upglevel1 * 1 + upglevel2 * 5 + upglevel3 * 10 + upglevel4 * 20;
     points += pointsvalue;
     update();
-    saveGame();
 });
 
 // UPGRADE 1
@@ -59,7 +58,6 @@ document.getElementById('clickDouble').addEventListener('click', () => {
     document.getElementById("cijenaDouble").textContent = format(cijena);
     document.getElementById("upglevel1").textContent = upglevel1;
     update();
-    saveGame();
 });
 
 // UPGRADE 2
@@ -71,7 +69,6 @@ document.getElementById('clickDouble2').addEventListener('click', () => {
     document.getElementById("cijenaDouble2").textContent = format(cijena2);
     document.getElementById("upglevel2").textContent = upglevel2;
     update();
-    saveGame();
 });
 
 // UPGRADE 3
@@ -83,7 +80,6 @@ document.getElementById('clickDouble3').addEventListener('click', () => {
     document.getElementById("cijenaDouble3").textContent = format(cijena3);
     document.getElementById("upglevel3").textContent = upglevel3;
     update();
-    saveGame();
 });
 
 // UPGRADE 4
@@ -95,7 +91,7 @@ document.getElementById('clickDouble4').addEventListener('click', () => {
     document.getElementById("cijenaDouble4").textContent = format(cijena4);
     document.getElementById("upglevel4").textContent = upglevel4;
     update();
-    saveGame();
+
 });
 
 // WORKER 1
@@ -107,7 +103,7 @@ document.getElementById('afkminer').addEventListener('click', () => {
     document.getElementById("cijenaMiner").textContent = format(cijenaMinerValue);
     document.getElementById("worlevel1").textContent = worlevel1;
     update();
-    saveGame();
+
 });
 
 // WORKER 2
@@ -119,7 +115,7 @@ document.getElementById('afkminer2').addEventListener('click', () => {
     document.getElementById("cijenaMiner2").textContent = format(cijenaMinerValue2);
     document.getElementById("worlevel2").textContent = worlevel2;
     update();
-    saveGame();
+
 });
 
 // WORKER 3
@@ -139,7 +135,7 @@ setInterval(() => {
     pps = (worlevel1 * 1) + (worlevel2 * 5) + (worlevel3 * 10);
     points += pps;
     update();
-    saveGame();
+    
 }, 1000);
 
 // PEPS
@@ -164,5 +160,6 @@ function update() {
     document.getElementById("afkminer2").disabled = points < cijenaMinerValue2;
     document.getElementById("afkminer3").disabled = points < cijenaMinerValue3;
 }
+
 
 
