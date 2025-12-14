@@ -179,6 +179,19 @@ body {
     font-weight: bold;
     margin-top: 15px;
 }
+.beyond-btn, .uup-btn {
+    position: relative;
+    margin-top: 10px;
+    background: #9c27b0;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+.card {
+    position: relative;
+}
+
 
 /* MOBILE */
 @media (max-width: 900px) {
@@ -211,6 +224,7 @@ body {
         margin-top: 15px;
     }
 }
+
 
 
 
