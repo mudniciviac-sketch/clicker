@@ -47,7 +47,6 @@ body {
 
 /* Kad je enemy aktivan, dodajemo border/efekt */
 .enemy-active .enemy-main-img {
-    box-shadow: 0 0 20px #ff7f7f;
     transform: translateY(0);
 }
 
@@ -267,3 +266,4 @@ body {
         margin-top: 15px;
     }
 }
+
