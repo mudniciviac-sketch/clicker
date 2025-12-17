@@ -164,8 +164,6 @@ body {
 .enemy-thumb {
     width: 64px;
     height: 64px;
-    border-radius: 8px;
-    border: 2px solid #ccc;
     background-size: cover;
     background-position: center;
     cursor: pointer;
@@ -266,4 +264,5 @@ body {
         margin-top: 15px;
     }
 }
+
 
