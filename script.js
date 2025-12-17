@@ -6,6 +6,9 @@ document.querySelectorAll('.tab').forEach(tab => {
 
         tab.classList.add('active');
         document.getElementById(tab.dataset.tab).classList.add('active');
+
+        // === OVDE DODANO: upravljanje ponašanjem lijevog panela kad otvorimo enemy tab ===
+        handleTabChange(tab.dataset.tab);
     });
 });
 
@@ -58,16 +61,55 @@ let provjera2 = 0;
 let provjera3 = 0;
 let provjera4 = 0;
 
-// CLICK BUTTON
+/* =========================
+   === ENEMY VARIABLES ===
+   =========================
+   enemyLevel: počinje od 1 (HP: 1)
+   enemyMaxHP: izračunat kao 10^(level-1) -> daje 1,10,100...
+   enemyHP: trenutni HP
+   enemyImages: lista data-uri SVG-ova / URL-ova (možeš zamijeniti vlastitim slikama)
+   galleryCount: broj thumbova koje prikazujemo
+*/
+let enemyLevel = 1;
+let enemyMaxHP = 1; // 10^(enemyLevel-1)
+let enemyHP = enemyMaxHP;
+let enemyImages = [
+
+    'https://s.alicdn.com/@sc04/kf/A88a19a1e081c409d8c53995a21b80d6do.png',
+    'https://png.pngtree.com/png-vector/20240207/ourmid/pngtree-red-wine-drink-bottle-png-image_11680582.png',
+    'https://png.pngtree.com/png-vector/20230831/ourmid/pngtree-one-shot-one-beer-png-image_9210058.png',
+    'sss.png',
+    'https://cdn11.bigcommerce.com/s-x3kq5bcr0e/products/11399/images/6975/Absolut_Vodka_1L-1__11832.1739697446.386.513.png?c=1'
+];
+let currentEnemyImgIndex = 0;
+let galleryCount = 4; // koliko thumbnaila prikazujemo
+
+// Praćenje trenutnog aktivnog taba
+let currentTab = 'upgrades';
+
+// CLICK BUTTON (lijevi panel) - modificirano da služi i za attack kada je enemy tab aktivan
 document.getElementById('clickButton').addEventListener('click', () => {
-    pointsvalue = 
+    // update pointsvalue prije svega (kao i u originalnom kodu)
+    pointsvalue =
         1 +
         upglevel1 * uuplevel1 * 1 +
         upglevel2 * uuplevel2 * 5 +
         upglevel3 * uuplevel3 * 10 +
         upglevel4 * uuplevel4 * 20;
-    points += pointsvalue;
-    update();
+
+    if (currentTab === 'enemy') {
+        // === ATTACK ===
+        // smanji enemyHP za PPC (pointsvalue)
+        enemyHP -= pointsvalue;
+        if (enemyHP < 0) enemyHP = 0;
+        // ne dodaj bodove pri kliku, samo attack (po tvom zahtjevu)
+        checkEnemyDead();
+        updateEnemyUI();
+    } else {
+        // ORIGINALNI KLIK (dodaje poene)
+        points += pointsvalue;
+        update();
+    }
 });
 
 // UPGRADE 1
@@ -156,7 +198,7 @@ document.getElementById("uup4").addEventListener("click", () => {
     update();
 });
 
-// WORKERS (isti kod kao prije)
+// WORKERS
 document.getElementById('afkminer').addEventListener('click', () => {
     if (points < cijenaMinerValue) return;
     points -= cijenaMinerValue;
@@ -187,24 +229,41 @@ document.getElementById('afkminer3').addEventListener('click', () => {
     update();
 });
 
-// AUTO PPS
+document.getElementById('forceNewEnemy').addEventListener('click', () => {
+    spawnNewEnemy(true);
+});
+
+
 setInterval(() => {
     pps = (worlevel1 * 1) + (worlevel2 * 5) + (worlevel3 * 10);
     points += pps;
     update();
 }, 1000);
 
-// PEPS
+
 setInterval(() => {
     let peps = points - prevPoints;
     prevPoints = points;
     document.getElementById("e").textContent = format(peps);
 }, 1000);
 
-// UPDATE UI
+
+
+setInterval(() => {
+    if (currentTab === 'enemy') {
+        if (pps > 0 && enemyHP > 0) {
+            enemyHP -= pps;
+            if (enemyHP < 0) enemyHP = 0;
+            checkEnemyDead();
+            updateEnemyUI();
+        }
+    }
+}, 1000);
+
+
 function update() {
-    // points + PPC + PPS
-    pointsvalue = 
+
+    pointsvalue =
         1 +
         upglevel1 * uuplevel1 * 1 +
         upglevel2 * uuplevel2 * 5 +
@@ -224,17 +283,134 @@ function update() {
     document.getElementById("afkminer2").disabled = points < cijenaMinerValue2;
     document.getElementById("afkminer3").disabled = points < cijenaMinerValue3;
 
-    // Beyond Upgrade gumbi pojavljuju se na 5,10,15...
+
     if(upglevel1 > 0 && upglevel1 % 5 === 0) document.getElementById("uup1").style.display = "block";
     if(upglevel2 > 0 && upglevel2 % 5 === 0) document.getElementById("uup2").style.display = "block";
     if(upglevel3 > 0 && upglevel3 % 5 === 0) document.getElementById("uup3").style.display = "block";
     if(upglevel4 > 0 && upglevel4 % 5 === 0) document.getElementById("uup4").style.display = "block";
 
-    // ažuriraj cijene Beyond (ako želiš dinamički)
+
     document.getElementById("uupCost1").textContent = format(uupCost1);
     document.getElementById("uupCost2").textContent = format(uupCost2);
     document.getElementById("uupCost3").textContent = format(uupCost3);
     document.getElementById("uupCost4").textContent = format(uupCost4);
+
+    
+    updateEnemyUI();
+}
+
+/* ENEMY FUNKCIJE */
+
+
+function handleTabChange(tabName) {
+    currentTab = tabName;
+    const left = document.querySelector('.left');
+    const mainImg = document.getElementById('mainImg');
+    if (tabName === 'enemy') {
+        
+        left.classList.add('enemy-active');
+        mainImg.classList.remove('beer-img');
+        mainImg.classList.add('enemy-main-img');
+        mainImg.src = enemyImages[currentEnemyImgIndex];
+       
+        updateEnemyUI();
+        populateGallery();
+    } else {
+        
+        left.classList.remove('enemy-active');
+        mainImg.classList.add('beer-img');
+        mainImg.classList.remove('enemy-main-img');
+        mainImg.src = "https://drinks.hr/app/uploads/2024/11/captain-morgan-white-rum-750ml-canada-gs1-front-grip-digital-render.png";
+    }
 }
 
 
+function checkEnemyDead() {
+    if (enemyHP <= 0) {
+        
+        points += 2 * enemyLevel * pointsvalue;
+
+        
+        enemyLevel++;
+        enemyMaxHP = enemyMaxHP * 10; 
+        enemyHP = enemyMaxHP;
+
+        
+        currentEnemyImgIndex = Math.floor(Math.random() * enemyImages.length);
+
+        
+        populateGallery();
+        update();
+    }
+}
+
+// Ažuriraj enemy UI polja
+function updateEnemyUI() {
+    document.getElementById('enemyLevel').textContent = enemyLevel;
+    document.getElementById('enemyHP').textContent = format(enemyHP);
+    document.getElementById('enemyMaxHP').textContent = format(enemyMaxHP);
+    document.getElementById('enemyReward').textContent = format(2 * enemyLevel * pointsvalue);
+
+    const mainImg = document.getElementById('mainImg');
+    if (currentTab === 'enemy') {
+        mainImg.src = enemyImages[currentEnemyImgIndex];
+    }
+
+
+    const lvlEl = document.getElementById('enemyLevel');
+    lvlEl.style.background = getLevelColor(enemyLevel);
+    lvlEl.style.padding = '4px 8px';
+    lvlEl.style.borderRadius = '6px';
+}
+
+
+function getLevelColor(l) {
+    if (l <= 5) return '#bff199'; 
+    if (l <= 10) return '#fff59d'; 
+    if (l <= 15) return '#ffd79a'; 
+    if (l <= 20) return '#ff9a9a'; 
+    return '#ffb0ff'; 
+}
+
+/* Populiraj galeriju thumbnaila s nasumičnim slikama (pri spawn-u ili kada user želi novu) */
+function populateGallery() {
+    const g = document.getElementById('enemyGallery');
+    g.innerHTML = '';
+    // izaberi galleryCount nasumičnih indexa (mogu se ponavljati)
+    for (let i = 0; i < galleryCount; i++) {
+        const idx = Math.floor(Math.random() * enemyImages.length);
+        const div = document.createElement('div');
+        div.classList.add('enemy-thumb');
+        div.style.backgroundImage = `url("${enemyImages[idx]}")`;
+        // klik na thumb postavlja tu sliku kao glavnu (i daje male visual povrat)
+        div.addEventListener('click', () => {
+            currentEnemyImgIndex = idx;
+            // osveži glavnu sliku
+            if (currentTab === 'enemy') {
+                document.getElementById('mainImg').src = enemyImages[currentEnemyImgIndex];
+            }
+        });
+        g.appendChild(div);
+    }
+}
+
+/* Spawn new enemy (force = true ako želimo odmah novi bez čekanja) */
+function spawnNewEnemy(force=false) {
+    if (force) {
+        currentEnemyImgIndex = Math.floor(Math.random() * enemyImages.length);
+        enemyLevel = 1;
+        enemyMaxHP = 1;
+        enemyHP = enemyMaxHP;
+        populateGallery();
+        update();
+    } else {
+        // inače: samo promjena slike i reset hp prema novom levelu
+        currentEnemyImgIndex = Math.floor(Math.random() * enemyImages.length);
+        enemyHP = enemyMaxHP;
+        update();
+    }
+}
+
+// inicijalno populate galerije
+populateGallery();
+update();

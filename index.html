@@ -15,8 +15,9 @@
 
         <h1 class="title">Beer Drinking Clicker</h1>
 
+        <!-- LJEVI KLIK AREA (meni: prikazuje pivu ili enemy sliku ovisno o tabu) -->
         <div id="clickButton" class="beer-area">
-            <img src="https://drinks.hr/app/uploads/2024/11/captain-morgan-white-rum-750ml-canada-gs1-front-grip-digital-render.png"
+            <img id="mainImg" src="https://drinks.hr/app/uploads/2024/11/captain-morgan-white-rum-750ml-canada-gs1-front-grip-digital-render.png"
                  alt="Beer" class="beer-img">
         </div>
 
@@ -32,6 +33,10 @@
         <div class="tabs">
             <button class="tab active" data-tab="upgrades">Upgrades</button>
             <button class="tab" data-tab="workers">Workers</button>
+            <!-- === ENEMY TAB === -->
+            <button class="tab" data-tab="enemy">Enemy</button>
+            <!-- === END ENEMY TAB === -->
+
             <span class="pps">PPC: <span id="k">0</span></span>
             <span class="pps">PPS: <span id="n">0</span></span>
             <span class="pps">PEPS: <span id="e">0</span></span>
@@ -128,6 +133,34 @@
 
         </div>
 
+        <!-- === ENEMY PANEL (NOVO) === -->
+        <div id="enemy" class="panel">
+
+            <div class="card">
+                <div class="card-left">
+                    <h3 id="enemyTitle">Beer enemy</h3>
+                    <p>Level: <span id="enemyLevel">1</span></p>
+                    <p>HP: <span id="enemyHP">1</span> / <span id="enemyMaxHP">1</span></p>
+                    <p>Reward on death: <span id="enemyReward">0</span> pive</p>
+                </div>
+                <div class="card-img enemy-card-img">
+                    <!-- Ovdje će biti glavna enemy slika u lijevom panelu (thumbnaili u galeriji) -->
+                </div>
+                <div class="card-desc">Klikni lijevo da napadneš (PPC), HP se također smanjuje za PPS svakih sekundi.</div>
+            </div>
+
+            <!-- GALERIJA (lista slika koje random dolaze) -->
+            <div class="card">
+                <div class="card-left">
+                    <h4>Gallery</h4>
+                    <div id="enemyGallery" class="enemy-gallery"></div>
+                    <button id="forceNewEnemy" class="buy-btn">New Enemy (force)</button>
+                </div>
+            </div>
+
+        </div>
+        <!-- === END ENEMY PANEL === -->
+
     </div>
 
 </div>
@@ -135,4 +168,3 @@
 <script src="script.js"></script>
 </body>
 </html>
-
